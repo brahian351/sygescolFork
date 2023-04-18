@@ -16,6 +16,7 @@ function MyResult({ InfoPdf, data, firma }: Props) {
   return (
     <Document>
       {InfoPdf?.estudiante.map((inf: any, key: number) => {
+        let alto = 297;
         return (
           <Page size={"A4"} key={key} wrap>
             <View
@@ -31,10 +32,11 @@ function MyResult({ InfoPdf, data, firma }: Props) {
             >
               <Cabecera data={data} />
               <PersonalInfo data={inf} grup={InfoPdf?.grupo} />
-              <Dimension dimensiones={InfoPdf?.cga} data={inf} />
-              <Comportamiento data={inf} />
+              <Dimension dimensiones={InfoPdf?.cga} data={inf} alto={alto} />
+              {/* <Page /> */}
+              {/* <Comportamiento data={inf} />
               <Asistencia data={inf.asistencia} />
-              <Firmas firma={firma} />
+              <Firmas firma={firma} /> */}
             </View>
           </Page>
         );

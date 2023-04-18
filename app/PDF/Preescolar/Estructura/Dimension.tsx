@@ -3,8 +3,9 @@ import React from "react";
 export type Props = {
   dimensiones?: any;
   data?: any;
+  alto: number;
 };
-function Dimension({ dimensiones, data }: Props) {
+function Dimension({ dimensiones, data, alto }: Props) {
   let desempeño: any = [
     {
       value: 1,
@@ -28,6 +29,14 @@ function Dimension({ dimensiones, data }: Props) {
     },
   ];
   const style: any = {
+    marginHeader: {
+      border: "2px solid black",
+      width: "96%",
+      height: 600,
+      marginTop: "2%",
+      marginLeft: "2%",
+      display: "flex",
+    },
     table: {
       // display: "table" as any,
       width: "auto",
@@ -40,13 +49,14 @@ function Dimension({ dimensiones, data }: Props) {
     table2: {
       display: "table" as any,
       width: "30%",
-      heigth: "100%",
+      // heigth: "100%",
       borderStyle: "solid",
       borderWidth: 0,
       marginLeft: -1,
     },
     tableRow: {
       flexDirection: "row",
+      // height: "100%",
     },
     tableColText: {
       width: "90%",
@@ -75,57 +85,61 @@ function Dimension({ dimensiones, data }: Props) {
   };
   return (
     <>
-      <View style={style.table}>
-        <View style={style.tableRow}>
-          <Text style={style.tableCellTitle}>DIMENSIONES</Text>
-          <Text style={style.tableCell}>I.H.S</Text>
-          <View style={style.table2}>
-            <View style={style.tableRow}>
-              <Text
-                style={{
-                  border: 1,
-                  textAlign: "center",
-                  width: "100%",
-                  fontSize: 10,
-                  padding: "2%",
-                  fontWeight: "bold",
-                }}
-              >
-                Valoración
-              </Text>
-            </View>
-            <View>
-              <Text
-                style={{
-                  border: 1,
-                  textAlign: "center",
-                  width: "100%",
-                  fontSize: 10,
-                  padding: "2%",
-                  fontWeight: "bold",
-                  marginTop: -1,
-                }}
-              >
-                Desempeño
-              </Text>
+      <View style={style.marginHeader} wrap>
+        <View style={style.table}>
+          <View style={style.tableRow}>
+            <Text style={style.tableCellTitle}>DIMENSIONES</Text>
+            <Text style={style.tableCell}>I.H.S</Text>
+            <View style={style.table2}>
+              <View style={style.tableRow}>
+                <Text
+                  style={{
+                    border: 1,
+                    textAlign: "center",
+                    width: "100%",
+                    fontSize: 10,
+                    padding: "2%",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Valoración
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    border: 1,
+                    textAlign: "center",
+                    width: "100%",
+                    fontSize: 10,
+                    padding: "2%",
+                    fontWeight: "bold",
+                    marginTop: -1,
+                  }}
+                >
+                  Desempeño
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-        {dimensiones.map((dim: any, key: number) => {
-          const notas = data?.notas?.find(
-            (est: any) => dim.Asignaturas[0]?.id == est.Asignatura
-          );
-          let escala = desempeño.find((des: any) => des.value == notas?.escala);
+          {dimensiones.map((dim: any, key: number) => {
+            const notas = data?.notas?.find(
+              (est: any) => dim.Asignaturas[0]?.id == est.Asignatura
+            );
+            let escala = desempeño.find(
+              (des: any) => des.value == notas?.escala
+            );
 
-          return (
-            <>
-              <View style={style.tableRow} key={key}>
+            return (
+              <>
+                {/* <View style={style.tableRow} key={key}>
                 <Text
                   style={{
                     border: 1,
                     width: "75.3%",
                     fontSize: 10,
                     padding: "1%",
+                    height: "100%",
                     fontWeight: "bold",
                     marginTop: -1,
                   }}
@@ -138,6 +152,7 @@ function Dimension({ dimensiones, data }: Props) {
                     width: "27%",
                     fontSize: 10,
                     padding: "1%",
+                    height: "100%",
                     fontWeight: "bold",
                     marginTop: -1,
                     marginLeft: -1,
@@ -145,29 +160,30 @@ function Dimension({ dimensiones, data }: Props) {
                 >
                   {escala?.label || ""}
                 </Text>
-              </View>
-              {dim.Asignaturas.map((asig: any, key2: number) => {
-                const notas = data?.notas?.find(
-                  (est: any) => asig?.id == est.Asignatura
-                );
-                let escala = desempeño.find(
-                  (des: any) => des.value == notas?.escala
-                );
-                const procesos = data?.notas?.filter(
-                  (est: any) => asig?.id == est.Asignatura
-                );
-                const observaciones = data?.observaciones?.filter(
-                  (obs: any) => asig?.id == obs.Asignatura
-                );
-                return (
-                  <>
-                    <View style={style.tableRow} key={key2}>
+              </View> */}
+                {dim.Asignaturas.map((asig: any, key2: number) => {
+                  const notas = data?.notas?.find(
+                    (est: any) => asig?.id == est.Asignatura
+                  );
+                  let escala = desempeño.find(
+                    (des: any) => des.value == notas?.escala
+                  );
+                  const procesos = data?.notas?.filter(
+                    (est: any) => asig?.id == est.Asignatura
+                  );
+                  const observaciones = data?.observaciones?.filter(
+                    (obs: any) => asig?.id == obs.Asignatura
+                  );
+                  return (
+                    <>
+                      {/* <View style={style.tableRow} key={key2}>
                       <Text
                         style={{
                           border: 1,
                           width: "67.3%",
                           fontSize: 10,
                           padding: "1%",
+                          height: "100%",
                           fontWeight: "bold",
                           marginTop: -1,
                         }}
@@ -181,6 +197,7 @@ function Dimension({ dimensiones, data }: Props) {
                           fontSize: 10,
                           textAlign: "center",
                           padding: "1%",
+                          height: "100%",
                           fontWeight: "bold",
                           marginTop: -1,
                           marginLeft: -1,
@@ -194,6 +211,7 @@ function Dimension({ dimensiones, data }: Props) {
                           width: "27%",
                           fontSize: 10,
                           padding: "1%",
+                          height: "100%",
                           fontWeight: "bold",
                           marginLeft: -1,
                           marginTop: -1,
@@ -201,36 +219,47 @@ function Dimension({ dimensiones, data }: Props) {
                       >
                         {escala?.label || ""}
                       </Text>
-                    </View>
-                    {procesos?.map((pro: any, key3: number) => {
-                      let escala2 = desempeño.find(
-                        (des: any) => des.value == pro?.escala
-                      );
-                      // let contador = key3;
-                      // if (contador == 2) {
-                      //   <Page />;
-                      //   contador = 0;
-                      // }
-                      return (
-                        <>
-                          <View style={style.tableRow}>
-                            <Text
-                              style={{
-                                border: 1,
-                                width: "75%",
-                                fontSize: 10,
-                                padding: "1%",
-                                fontWeight: "bold",
-                                marginTop: -1,
-                              }}
-                            >
-                              {pro.texto.charAt(0).toUpperCase() +
-                                pro.texto.slice(1).toLowerCase()}
-                            </Text>
+                    </View> */}
+                      {procesos?.map((pro: any, key3: number) => {
+                        let escala2 = desempeño.find(
+                          (des: any) => des.value == pro?.escala
+                        );
+                        alto = alto - 50;
+                        // console.log(alto);
+                        if (alto == 47) {
+                          alto = 297;
+                          <Page />;
+                        }
+                        return (
+                          <>
                             <View
+                              style={(style.tableRow, { flexWrap: "wrap" })}
+                            >
+                              <View
+                                style={{
+                                  width: "75%",
+                                  border: 1,
+                                }}
+                              >
+                                <Text
+                                  style={{
+                                    // border: 1,
+                                    width: "75%",
+                                    fontSize: 10,
+                                    padding: "1%",
+                                    fontWeight: "bold",
+                                    marginTop: -1,
+                                  }}
+                                >
+                                  {pro.texto.charAt(0).toUpperCase() +
+                                    pro.texto.slice(1).toLowerCase()}
+                                </Text>
+                              </View>
+                              {/* <View
                               style={{
                                 border: 1,
                                 width: "27%",
+                                height: "100%",
                                 fontSize: 10,
                                 padding: "1%",
                                 fontWeight: "bold",
@@ -238,58 +267,61 @@ function Dimension({ dimensiones, data }: Props) {
                                 marginTop: -1,
                               }}
                             >
-                              {/* <Image
+                              <Image
                                 src={`/Descriptores/${escala2?.img}.png`}
                                 style={{
                                   width: 50,
                                   height: 50,
                                   margin: "auto",
                                 }}
-                              /> */}
+                              />
+                            </View> */}
                             </View>
-                          </View>
-                        </>
-                      );
-                    })}
-                    {observaciones?.map((obs: any) => {
-                      return (
-                        <>
-                          <View style={style.tableRow}>
-                            <Text
-                              style={{
-                                border: 1,
-                                width: "20%",
-                                fontSize: 11,
-                                padding: "1%",
-                                fontWeight: "bold",
-                                marginTop: -1,
-                              }}
-                            >
-                              Observación:
-                            </Text>
-                            <Text
-                              style={{
-                                border: 1,
-                                width: "85%",
-                                fontSize: 10,
-                                padding: "1%",
-                                fontWeight: "bold",
-                                marginTop: -1,
-                                marginLeft: -1,
-                              }}
-                            >
-                              {obs.texto}
-                            </Text>
-                          </View>
-                        </>
-                      );
-                    })}
-                  </>
-                );
-              })}
-            </>
-          );
-        })}
+                          </>
+                        );
+                      })}
+                      {observaciones?.map((obs: any) => {
+                        return (
+                          <>
+                            <View style={style.tableRow}>
+                              <Text
+                                style={{
+                                  border: 1,
+                                  width: "20%",
+                                  fontSize: 11,
+                                  height: "100%",
+                                  padding: "1%",
+                                  fontWeight: "bold",
+                                  marginTop: -1,
+                                }}
+                              >
+                                Observación:
+                              </Text>
+                              <Text
+                                style={{
+                                  border: 1,
+                                  width: "85%",
+                                  fontSize: 10,
+                                  padding: "1%",
+                                  fontWeight: "bold",
+                                  height: "100%",
+                                  marginTop: -1,
+                                  marginLeft: -1,
+                                }}
+                              >
+                                {obs.texto}
+                              </Text>
+                            </View>
+                          </>
+                        );
+                      })}
+                    </>
+                  );
+                })}
+              </>
+            );
+          })}
+        </View>
       </View>
     </>
   );
