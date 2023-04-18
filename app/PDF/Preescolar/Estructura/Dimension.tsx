@@ -6,6 +6,7 @@ export type Props = {
   alto: number;
 };
 function Dimension({ dimensiones, data, alto }: Props) {
+  let escala2: any = "";
   let desempeño: any = [
     {
       value: 1,
@@ -30,11 +31,9 @@ function Dimension({ dimensiones, data, alto }: Props) {
   ];
   const style: any = {
     marginHeader: {
-      border: "2px solid black",
+      // border: "2px solid black",
       width: "96%",
       height: 600,
-      marginTop: "2%",
-      marginLeft: "2%",
       display: "flex",
     },
     table: {
@@ -70,15 +69,17 @@ function Dimension({ dimensiones, data, alto }: Props) {
       border: 1,
       width: "75%",
       textAlign: "center",
+      height: 20,
       fontSize: 10,
-      padding: "2%",
+      padding: "0.5%",
       fontWeight: "bold",
     },
     tableCell: {
       border: 1,
       textAlign: "center",
+      height: 20,
       fontSize: 10,
-      padding: "2%",
+      padding: "0.5%",
       fontWeight: "bold",
       marginLeft: -1,
     },
@@ -97,24 +98,24 @@ function Dimension({ dimensiones, data, alto }: Props) {
                     border: 1,
                     textAlign: "center",
                     width: "100%",
-                    fontSize: 10,
-                    padding: "2%",
+                    height: 10,
+                    fontSize: 8,
                     fontWeight: "bold",
                   }}
                 >
                   Valoración
                 </Text>
               </View>
-              <View>
+              <View style={style.tableRow}>
                 <Text
                   style={{
                     border: 1,
                     textAlign: "center",
                     width: "100%",
-                    fontSize: 10,
-                    padding: "2%",
+                    height: 10,
+                    fontSize: 8,
                     fontWeight: "bold",
-                    marginTop: -1,
+                    marginTop: 4,
                   }}
                 >
                   Desempeño
@@ -132,35 +133,34 @@ function Dimension({ dimensiones, data, alto }: Props) {
 
             return (
               <>
-                {/* <View style={style.tableRow} key={key}>
-                <Text
-                  style={{
-                    border: 1,
-                    width: "75.3%",
-                    fontSize: 10,
-                    padding: "1%",
-                    height: "100%",
-                    fontWeight: "bold",
-                    marginTop: -1,
-                  }}
-                >
-                  {dim.Area}
-                </Text>
-                <Text
-                  style={{
-                    border: 1,
-                    width: "27%",
-                    fontSize: 10,
-                    padding: "1%",
-                    height: "100%",
-                    fontWeight: "bold",
-                    marginTop: -1,
-                    marginLeft: -1,
-                  }}
-                >
-                  {escala?.label || ""}
-                </Text>
-              </View> */}
+                <View style={style.tableRow} key={key}>
+                  <Text
+                    style={{
+                      border: 1,
+                      width: "73%",
+                      fontSize: 10,
+                      height: 12,
+                      fontWeight: "bold",
+                      marginTop: 7,
+                    }}
+                  >
+                    {dim.Area}
+                  </Text>
+                  <Text
+                    style={{
+                      border: 1,
+                      width: "27%",
+                      fontSize: 10,
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      height: 12,
+                      marginTop: 7,
+                      marginLeft: -1,
+                    }}
+                  >
+                    {escala?.label || ""}
+                  </Text>
+                </View>
                 {dim.Asignaturas.map((asig: any, key2: number) => {
                   const notas = data?.notas?.find(
                     (est: any) => asig?.id == est.Asignatura
@@ -176,52 +176,51 @@ function Dimension({ dimensiones, data, alto }: Props) {
                   );
                   return (
                     <>
-                      {/* <View style={style.tableRow} key={key2}>
-                      <Text
-                        style={{
-                          border: 1,
-                          width: "67.3%",
-                          fontSize: 10,
-                          padding: "1%",
-                          height: "100%",
-                          fontWeight: "bold",
-                          marginTop: -1,
-                        }}
-                      >
-                        {asig.asignatura}
-                      </Text>
-                      <Text
-                        style={{
-                          border: 1,
-                          width: "8%",
-                          fontSize: 10,
-                          textAlign: "center",
-                          padding: "1%",
-                          height: "100%",
-                          fontWeight: "bold",
-                          marginTop: -1,
-                          marginLeft: -1,
-                        }}
-                      >
-                        {asig.Horas}
-                      </Text>
-                      <Text
-                        style={{
-                          border: 1,
-                          width: "27%",
-                          fontSize: 10,
-                          padding: "1%",
-                          height: "100%",
-                          fontWeight: "bold",
-                          marginLeft: -1,
-                          marginTop: -1,
-                        }}
-                      >
-                        {escala?.label || ""}
-                      </Text>
-                    </View> */}
+                      <View style={style.tableRow} key={key2}>
+                        <Text
+                          style={{
+                            border: 1,
+                            width: 340,
+                            fontSize: 8,
+                            height: 10,
+                            fontWeight: "bold",
+                            marginTop: 9,
+                          }}
+                        >
+                          {asig.asignatura}
+                        </Text>
+                        <Text
+                          style={{
+                            border: 1,
+                            width: 26,
+                            height: 10,
+                            fontSize: 8,
+                            textAlign: "center",
+                            fontWeight: "bold",
+                            marginTop: 9,
+                            marginLeft: -1,
+                          }}
+                        >
+                          {asig.Horas}
+                        </Text>
+                        <Text
+                          style={{
+                            border: 1,
+                            width: 136,
+                            textAlign: "center",
+                            height: 10,
+                            fontSize: 8,
+                            fontWeight: "bold",
+                            marginLeft: -1,
+                            marginTop: 9,
+                          }}
+                        >
+                          {escala?.label || ""}
+                        </Text>
+                      </View>
                       {procesos?.map((pro: any, key3: number) => {
-                        let escala2 = desempeño.find(
+                        let total = (procesos.length - 1) * 34;
+                        escala2 = desempeño.find(
                           (des: any) => des.value == pro?.escala
                         );
                         alto = alto - 50;
@@ -232,64 +231,54 @@ function Dimension({ dimensiones, data, alto }: Props) {
                         }
                         return (
                           <>
-                            <View
-                              style={(style.tableRow, { flexWrap: "wrap" })}
-                            >
-                              <View
+                            <View style={style.tableRow}>
+                              <Text
                                 style={{
-                                  width: "75%",
-                                  border: 1,
+                                  width: 365,
+                                  height: 30,
+                                  borderRightWidth: 1,
+                                  borderLeftWidth: 1,
+                                  fontSize: 8,
+                                  fontWeight: "bold",
+                                  marginTop: 8,
                                 }}
                               >
-                                <Text
+                                {pro.texto.charAt(0).toUpperCase() +
+                                  pro.texto.slice(1).toLowerCase()}
+                              </Text>
+                              {key3 == 0 && (
+                                <View
                                   style={{
-                                    // border: 1,
-                                    width: "75%",
-                                    fontSize: 10,
-                                    padding: "1%",
-                                    fontWeight: "bold",
-                                    marginTop: -1,
+                                    marginTop: 9,
+                                    borderRightWidth: 1,
+                                    width: 135,
+                                    height: total,
                                   }}
                                 >
-                                  {pro.texto.charAt(0).toUpperCase() +
-                                    pro.texto.slice(1).toLowerCase()}
-                                </Text>
-                              </View>
-                              {/* <View
-                              style={{
-                                border: 1,
-                                width: "27%",
-                                height: "100%",
-                                fontSize: 10,
-                                padding: "1%",
-                                fontWeight: "bold",
-                                marginLeft: -1,
-                                marginTop: -1,
-                              }}
-                            >
-                              <Image
-                                src={`/Descriptores/${escala2?.img}.png`}
-                                style={{
-                                  width: 50,
-                                  height: 50,
-                                  margin: "auto",
-                                }}
-                              />
-                            </View> */}
+                                  <Image
+                                    src={`/Descriptores/${escala2?.img}.png`}
+                                    style={{
+                                      width: 50,
+                                      height: 50,
+                                      margin: "auto",
+                                    }}
+                                  />
+                                </View>
+                              )}
                             </View>
                           </>
                         );
                       })}
+
                       {observaciones?.map((obs: any) => {
                         return (
                           <>
                             <View style={style.tableRow}>
                               <Text
                                 style={{
-                                  border: 1,
+                                  border: 0,
                                   width: "20%",
                                   fontSize: 11,
-                                  height: "100%",
                                   padding: "1%",
                                   fontWeight: "bold",
                                   marginTop: -1,
@@ -299,12 +288,11 @@ function Dimension({ dimensiones, data, alto }: Props) {
                               </Text>
                               <Text
                                 style={{
-                                  border: 1,
+                                  border: 0,
                                   width: "85%",
                                   fontSize: 10,
                                   padding: "1%",
                                   fontWeight: "bold",
-                                  height: "100%",
                                   marginTop: -1,
                                   marginLeft: -1,
                                 }}

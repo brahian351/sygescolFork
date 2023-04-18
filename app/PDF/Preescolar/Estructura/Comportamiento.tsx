@@ -14,7 +14,7 @@ function Comportamiento({ data }: Props) {
       borderWidth: 0,
       marginLeft: "1%",
       marginRight: "1%",
-      marginTop: -7,
+      marginTop: 5,
     },
     tableRow: {
       flexDirection: "row",
