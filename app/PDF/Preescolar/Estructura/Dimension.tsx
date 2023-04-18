@@ -238,14 +238,14 @@ function Dimension({ dimensiones, data }: Props) {
                                 marginTop: -1,
                               }}
                             >
-                              {/* <Image
+                              <Image
                                 src={`/Descriptores/${escala2?.img}.png`}
                                 style={{
                                   width: 50,
                                   height: 50,
                                   margin: "auto",
                                 }}
-                              /> */}
+                              /> 
                             </View>
                           </View>
                         </>
