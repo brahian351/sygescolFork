@@ -19,7 +19,7 @@ const Cabecera = ({ data }: Props) => {
     marginHeader: {
       border: "2px solid black",
       width: "96%",
-      height: "12%",
+      height: 120,
       marginTop: "2%",
       marginLeft: "2%",
       display: "flex",
@@ -56,6 +56,7 @@ const Cabecera = ({ data }: Props) => {
     tableRow: {
       // margin: "auto",
       flexDirection: "row",
+      heigth: "100%",
     },
     tableColImage: {
       width: "10%",

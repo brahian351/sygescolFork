@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import Swal from "sweetalert2";
 import { customStyles } from "../../../../utils/CustomStylesTables";
 export type Props = {
   show: any;
@@ -11,6 +12,7 @@ export type Props = {
 };
 function ShowRegistro({ show, id, cga, type }: Props) {
   const [data, setData] = useState({} as any);
+  const [contador, setConteo] = useState(0 as number);
   let desempeño = [
     {
       value: 1,
@@ -29,7 +31,86 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       label: "Bajo",
     },
   ];
-
+  const handleDelete = (id: number) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Señor Profesor",
+      text: "Está seguro de eliminar este proceso para el estudiante seleccionado..?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "SI",
+      denyButtonText: `NO`,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        try {
+          axios
+            .get(
+              `/api/Planilla/Registros/Procesos/Delete?id=${id}&colegio=${localStorage.getItem(
+                "colegio"
+              )}`
+            )
+            .then((res) => {
+              if (res.status == 200) {
+                setConteo(contador + 1);
+                console.log(res.data);
+                Swal.fire({
+                  icon: "success",
+                  text: res.data.body,
+                  position: "top-end",
+                  timer: 2500,
+                });
+              }
+            });
+        } catch (error) {
+          console.log(error);
+          Swal.fire({
+            title: "Señor Docente",
+            text: "Existe un error al eliminar la información del proceso",
+          });
+        }
+      }
+    });
+  };
+  const handleDelete2 = (id: number) => {
+    Swal.fire({
+      icon: "warning",
+      title: "Señor Profesor",
+      text: "Está seguro de eliminar esta observación para el estudiante seleccionado..?",
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: "SI",
+      denyButtonText: `NO`,
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        try {
+          axios
+            .get(
+              `/api/Planilla/Registros/Observaciones/Delete?id=${id}&colegio=${localStorage.getItem(
+                "colegio"
+              )}`
+            )
+            .then((res) => {
+              if (res.status == 200) {
+                setConteo(contador + 1);
+                console.log(res.data);
+                Swal.fire({
+                  icon: "success",
+                  text: res.data.body,
+                  position: "top-end",
+                  timer: 2500,
+                });
+              }
+            });
+        } catch (error) {
+          console.log(error);
+          Swal.fire({
+            title: "Señor Docente",
+            text: "Existe un error al eliminar la información del proceso",
+          });
+        }
+      }
+    });
+  };
   const getData = async () => {
     await axios
       .get(
@@ -53,7 +134,37 @@ function ShowRegistro({ show, id, cga, type }: Props) {
     selectAllRowsItem: true,
     selectAllRowsItemText: "Todos",
   };
-
+  const columns2: any = [
+    {
+      name: "Texto Definido",
+      selector: (row: any) => (
+        <span className="text-lg text-justify">{row.texto}</span>
+      ),
+      sortable: true,
+      wrap: true,
+    },
+    {
+      name: "Desempeño Nacional",
+      selector: (row: any) => (
+        <div className="text-lg  font-bold">
+          {desempeño?.find((des) => des?.value == row.escala)?.label}
+        </div>
+      ),
+    },
+    {
+      name: "Operaciones",
+      selector: (row: any) => (
+        <div>
+          <button
+            className="bg-red-700 p-2 font-bold text-white rounded-md"
+            onClick={() => handleDelete2(row.id)}
+          >
+            Eliminar
+          </button>
+        </div>
+      ),
+    },
+  ];
   const columns: any = [
     {
       name: "Texto Definido",
@@ -71,10 +182,23 @@ function ShowRegistro({ show, id, cga, type }: Props) {
         </div>
       ),
     },
+    {
+      name: "Operaciones",
+      selector: (row: any) => (
+        <div>
+          <button
+            className="bg-red-700 p-2 font-bold text-white rounded-md"
+            onClick={() => handleDelete(row.id)}
+          >
+            Eliminar
+          </button>
+        </div>
+      ),
+    },
   ];
   useEffect(() => {
     getData();
-  }, []);
+  }, [contador]);
   return (
     <>
       <div className="bg-black/50 overflow-auto  transition duration-150 ease-in-out z-10 fixed top-0 right-0 bottom-0 left-0">
@@ -107,7 +231,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
                       "Lista de Observaciones"
                     }`}
                     data={data?.observaciones}
-                    columns={columns}
+                    columns={columns2}
                     customStyles={customStyles}
                     pagination
                     responsive

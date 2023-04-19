@@ -7,6 +7,7 @@ export async function GET(req: any) {
   let colegio = searchParams.get("c");
   let grupo = searchParams.get("g");
   let matricula = searchParams.get("m");
+  let idPeriodo = searchParams.get("p");
   try {
     const conexion = conecctions[colegio];
     const [dataColegio]: any = await conexion.query(
@@ -26,12 +27,15 @@ export async function GET(req: any) {
     const [periodo]: any = await conexion.query(
       `SELECT periodo_academicos.per_id, per_nombre FROM periodo_academicos INNER JOIN periodo_fechas ON periodo_academicos.per_id = periodo_fechas.per_id  INNER JOIN v_grupos ON v_grupos.per_con_id = periodo_academicos.per_con_id INNER JOIN grados ON v_grupos.grado_base = grados.id_grado AND grados.nivel = periodo_academicos.nivel WHERE grupo_id = ${grupo} AND periodo_academicos.inicio_ing_notas <= CURDATE() AND periodo_academicos.fin_ing_notas >= CURDATE()`
     );
+    const [periodos]: any = await conexion.query(
+      `SELECT periodo_academicos.per_id AS value, per_nombre as label FROM periodo_academicos INNER JOIN periodo_fechas ON periodo_academicos.per_id = periodo_fechas.per_id  INNER JOIN v_grupos ON v_grupos.per_con_id = periodo_academicos.per_con_id INNER JOIN grados ON v_grupos.grado_base = grados.id_grado AND grados.nivel = periodo_academicos.nivel WHERE grupo_id = ${grupo} AND periodo_academicos.inicio_ing_notas <= CURDATE()`
+    );
 
     const [cga]: any = await conexion.query(
       `SELECT cga.i AS id, aintrs.b AS asignatura, aes.b AS Area, cga.u AS Horas FROM cga INNER JOIN aintrs ON aintrs.i = cga.a INNER JOIN efr ON aintrs.g = efr.i INNER JOIN aes ON efr.a = aes.i  INNER JOIN v_grupos ON cga.b = v_grupos.grupo_id WHERE cga.b = ${grupo} AND grado_base = 0`
     );
     const [comportamiento]: any = await conexion.query(
-      `SELECT compo_observacion, compo_nota_num_def, matri_id, per_id, esca_nac_nombre FROM comportamiento INNER JOIN escala_nacional ON escala_nacional.esca_nac_id = comportamiento.esca_nac_id_def WHERE per_id = '1'`
+      `SELECT compo_observacion, compo_nota_num_def, matri_id, per_id, esca_nac_nombre FROM comportamiento INNER JOIN escala_nacional ON escala_nacional.esca_nac_id = comportamiento.esca_nac_id_def WHERE per_id = '${idPeriodo}'`
     );
     const formatCga = cga?.reduce((acc: any, item: any) => {
       let key = `${item.Area}`;
@@ -52,10 +56,10 @@ export async function GET(req: any) {
 
     // console.log(formatCga);
     const [notas]: any = await conexion.query(
-      `SELECT PE.escala, texto, estudiante, NEP.cga AS Asignatura FROM newProcesoEstudiante NEP INNER JOIN newProcesosEvaluacion PE ON NEP.proceso = PE.id INNER JOIN newBancoProcesos BP ON BP.id = PE.relacionBanco WHERE NEP.periodo = 1`
+      `SELECT PE.escala, texto, estudiante, NEP.cga AS Asignatura FROM newProcesoEstudiante NEP INNER JOIN newProcesosEvaluacion PE ON NEP.proceso = PE.id INNER JOIN newBancoProcesos BP ON BP.id = PE.relacionBanco WHERE NEP.periodo = ${idPeriodo}`
     );
     const [observaciones]: any = await conexion.query(
-      `SELECT estudiante, texto, NOE.cga AS Asignatura FROM newObservacionesEstudiante NOE INNER JOIN newObservacionesProcesos NOP ON NOE.observacion = NOP.id INNER JOIN newBancoObservacionesProcesos NBOP ON NBOP.id = NOP.relacionBanco WHERE NOE.periodo = 1`
+      `SELECT estudiante, texto, NOE.cga AS Asignatura FROM newObservacionesEstudiante NOE INNER JOIN newObservacionesProcesos NOP ON NOE.observacion = NOP.id INNER JOIN newBancoObservacionesProcesos NBOP ON NBOP.id = NOP.relacionBanco WHERE NOE.periodo = ${idPeriodo}`
     );
     const studentFormat: any = [];
     for await (const est of estudiante) {
@@ -114,6 +118,7 @@ export async function GET(req: any) {
         estudiante: studentFormat,
         grupo: grupodData[0],
         cga: Object.values(formatCga),
+        periodos: periodos,
       },
       { status: 200 }
     );
