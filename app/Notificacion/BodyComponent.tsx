@@ -44,7 +44,7 @@ const BodyComponent = () => {
       <Dialog open={size === "xl"} size={size || "xl"} handler={handleOpen}>
         <DialogHeader>Relación de los Pendientes Hallados</DialogHeader>
         <DialogBody divider>
-          <div className="max-h-[80vh] overflow-auto">
+          <div className="max-h-[75vh] overflow-auto">
             <TablaModifica Pendientes={PendientesSelected} />
           </div>
         </DialogBody>

@@ -6,6 +6,8 @@ export type Props = {
   alto: number;
 };
 function Dimension({ dimensiones, data, alto }: Props) {
+  console.log();
+
   let escala2: any = "";
   let desempeño: any = [
     {
@@ -223,6 +225,9 @@ function Dimension({ dimensiones, data, alto }: Props) {
                         escala2 = desempeño.find(
                           (des: any) => des.value == pro?.escala
                         );
+
+                        console.log("escala2..", escala2);
+
                         alto = alto - 50;
                         // console.log(alto);
                         if (alto == 47) {
@@ -246,7 +251,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                                 {pro.texto.charAt(0).toUpperCase() +
                                   pro.texto.slice(1).toLowerCase()}
                               </Text>
-                              {key3 == 0 && (
+                              {key3 != 0 && (
                                 <View
                                   style={{
                                     marginTop: 9,
