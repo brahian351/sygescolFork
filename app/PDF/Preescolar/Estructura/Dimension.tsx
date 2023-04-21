@@ -6,8 +6,6 @@ export type Props = {
   alto: number;
 };
 function Dimension({ dimensiones, data, alto }: Props) {
-  console.log();
-
   let escala2: any = "";
   let desempeño: any = [
     {
@@ -226,7 +224,22 @@ function Dimension({ dimensiones, data, alto }: Props) {
                           (des: any) => des.value == pro?.escala
                         );
 
-                        console.log("escala2..", escala2);
+                        console.log(
+                          "escala2..",
+                          escala2,
+                          "othe",
+                          Object.keys(escala2).length
+                        );
+
+                        console.log(
+                          "image",
+                          `/Descriptores/${escala2?.img}.png`
+                        );
+
+                        console.log(
+                          "Object.keys(escala2).length",
+                          Object.keys(escala2).length
+                        );
 
                         alto = alto - 50;
                         // console.log(alto);
@@ -251,7 +264,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                                 {pro.texto.charAt(0).toUpperCase() +
                                   pro.texto.slice(1).toLowerCase()}
                               </Text>
-                              {key3 != 0 && (
+                              {/* {Object.keys(escala2).length > 0 && (
                                 <View
                                   style={{
                                     marginTop: 9,
@@ -263,13 +276,22 @@ function Dimension({ dimensiones, data, alto }: Props) {
                                   <Image
                                     src={`/Descriptores/${escala2?.img}.png`}
                                     style={{
-                                      width: 50,
-                                      height: 50,
+                                      width: "50",
+                                      height: "50",
                                       margin: "auto",
                                     }}
                                   />
                                 </View>
-                              )}
+                              )} */}
+
+                              <Image
+                                src={`/Descriptores/${escala2?.img}.png`}
+                                style={{
+                                  width: "50",
+                                  height: "50",
+                                  margin: "auto",
+                                }}
+                              />
                             </View>
                           </>
                         );
@@ -278,7 +300,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                       {observaciones?.map((obs: any) => {
                         return (
                           <>
-                            <View style={style.tableRow}>
+                            <View style={style?.tableRow}>
                               <Text
                                 style={{
                                   border: 0,

@@ -14,7 +14,7 @@ function HomePage() {
   return (
     <>
       <div className="h-screen">
-        <div className=" h-full container m-auto col-span-7  w-full flex-col bg-[url('/fondoWelcome.webp')] bg-cover bg-no-repeat flex items-center justify-center p-5 ">
+        <div className=" h-full container m-auto col-span-7  w-full flex-col bg-[url('/Parametros/fondo_sygescol.jpeg')] bg-cover bg-no-repeat flex items-center justify-center p-5 ">
           <div className="bg-[#070E54]/90 text-white rounded-[1rem] shadow-xl py-5 px-5 w-full lg:w-10/12 xl:w-3/4">
             <div className="grid lg:grid-cols-3 lg:gap-4 p-4 -mx-3 items-center">
               <div
