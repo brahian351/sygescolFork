@@ -224,23 +224,6 @@ function Dimension({ dimensiones, data, alto }: Props) {
                           (des: any) => des.value == pro?.escala
                         );
 
-                        console.log(
-                          "escala2..",
-                          escala2,
-                          "othe",
-                          Object.keys(escala2).length
-                        );
-
-                        console.log(
-                          "image",
-                          `/Descriptores/${escala2?.img}.png`
-                        );
-
-                        console.log(
-                          "Object.keys(escala2).length",
-                          Object.keys(escala2).length
-                        );
-
                         alto = alto - 50;
                         // console.log(alto);
                         if (alto == 47) {
@@ -288,7 +271,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                                 src={`/Descriptores/${escala2?.img}.png`}
                                 style={{
                                   width: "50",
-                                  height: "50",
+                                  height: "40",
                                   margin: "auto",
                                 }}
                               />
