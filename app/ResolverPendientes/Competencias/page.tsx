@@ -25,16 +25,16 @@ const Competencias = () => {
             >
               <form>
                 <div className="mb-6">
-                  <p>texto</p>
+                  <p>Grados</p>
                   <Select />
                 </div>
                 <div className="mb-6">
-                  <p>texto</p>
+                  <p>Asignaturas</p>
 
                   <Select />
                 </div>
                 <div className="mb-6">
-                  <p>texto</p>
+                  <p>Periodo</p>
 
                   <Select />
                 </div>

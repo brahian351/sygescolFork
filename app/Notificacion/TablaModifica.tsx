@@ -8,8 +8,11 @@ import {
   DialogFooter,
   DialogBody,
 } from "@material-tailwind/react";
+import Link from "next/link";
 
 const TablaModifica = ({ Pendientes }: any) => {
+  console.log("Pendientes", Pendientes);
+
   const [showInfo, setShowInfo] = useState({} as any);
   const [open, setOpen] = useState({ status: false, Estudiantes: [] } as any);
 
@@ -51,13 +54,6 @@ const TablaModifica = ({ Pendientes }: any) => {
           >
             <span>Cancel</span>
           </Button>
-          {/* <Button
-                    variant="gradient"
-                    color="green"
-                    onClick={handleOpen}
-                  >
-                    <span>Confirm</span>
-                  </Button> */}
         </DialogFooter>
       </Dialog>
       <div className=" font-bold m-3 overflow-x-auto shadow-lg sm:rounded-lg">
@@ -123,14 +119,13 @@ const TablaModifica = ({ Pendientes }: any) => {
                           )}
                         </td>
                         <td className="px-6 py-4 text-white font-semibold capitalize">
-                          <Button
-                            onClick={(e: any) => {
-                              e.preventDefault();
-                              alert("Resolver Pendientes");
-                            }}
-                          >
-                            Resolver Pendientes
-                          </Button>
+                          {pendiente?.tipo_pendiente === "forder" && (
+                            <>
+                              <Link href={`/ResolverPendientes/Forder?`}>
+                                <Button>Resolver Pendientes Forder</Button>
+                              </Link>
+                            </>
+                          )}
                         </td>
                       </tr>
                     </>

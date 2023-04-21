@@ -22,8 +22,8 @@ const BodyComponent = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.Pendientes || []);
-        data.body && alert(data.body);
+        setData(data?.Pendientes || []);
+        data?.body && alert(data?.body);
       })
       .catch((error) => {
         alert("Error al cargar los datos");
