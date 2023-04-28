@@ -83,7 +83,7 @@ const BodyComponent = () => {
       {Data?.length > 0 &&
         Data?.map((item: any) => (
           <BotonGrados
-            key={item.IdAuditoria}
+            key={item?.IdAuditoria}
             handleOpen={handleOpen}
             Grados={item}
             setPendientesSelected={setPendientesSelected}
