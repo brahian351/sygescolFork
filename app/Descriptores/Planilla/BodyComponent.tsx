@@ -55,6 +55,8 @@ function BodyComponent() {
         )}&grupo=${JSON?.parse(localStorage?.Grupo)?.grupo_id}`
       )
       .then((res) => {
+        console.log("res", res);
+
         if (res.status == 200) {
           return res.data;
         }
@@ -253,7 +255,7 @@ function BodyComponent() {
           customStyles={customStyles}
           pagination
           responsive
-          noDataComponent="Cargando Información"
+          noDataComponent="No hay estudiantes registrados en este grupo."
           paginationPerPage={4}
           paginationComponentOptions={paginationComponentOptions}
         />

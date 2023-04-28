@@ -121,7 +121,9 @@ const TablaModifica = ({ Pendientes }: any) => {
                         <td className="px-6 py-4 text-white font-semibold capitalize">
                           {pendiente?.tipo_pendiente === "forder" && (
                             <>
-                              <Link href={`/ResolverPendientes/Forder?`}>
+                              <Link
+                                href={`/ResolverPendientes/Forder?GrupoId=${pendiente?.GrupoId}&cga=${pendiente.cga}`}
+                              >
                                 <Button>Resolver Pendientes Forder</Button>
                               </Link>
                             </>
