@@ -85,7 +85,12 @@ function BodyComponent() {
             {" "}
             <BlobProvider
               document={
-                <MyResult InfoPdf={dataInfo} data={data} firma={firma} />
+                <MyResult
+                  InfoPdf={dataInfo}
+                  data={data}
+                  firma={firma}
+                  per={per}
+                />
               }
             >
               {({ blob, url, loading, error }: any) =>

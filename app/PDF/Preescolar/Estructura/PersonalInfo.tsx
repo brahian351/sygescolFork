@@ -3,8 +3,11 @@ import React from "react";
 export type Props = {
   data: any;
   grup: any;
+  per: any;
 };
-const PersonalInfo = ({ data, grup }: Props) => {
+const PersonalInfo = ({ data, grup, per }: Props) => {
+  console.log("per", per);
+
   const style: any = {
     marginHeader: {
       // border: "2px solid black",
@@ -255,7 +258,7 @@ const PersonalInfo = ({ data, grup }: Props) => {
                       })
                     }
                   >
-                    1
+                    {per.idPeriodo || ""}
                   </Text>
                 </View>
                 <View
