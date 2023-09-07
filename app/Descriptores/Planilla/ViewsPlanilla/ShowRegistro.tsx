@@ -116,11 +116,11 @@ function ShowRegistro({ show, id, cga, type }: Props) {
   };
 
   const getData = async () => {
-    
+
     await axios
       .get(`/api/Planilla/ShowInfo?c=${localStorage.getItem("colegio")}&e=${id}&cg=${cga}`)
       .then((res) => {
-        if (res.status == 200) { setData(res.data)}
+        if (res.status == 200) { setData(res.data) }
       })
       .catch((err) => {
         console.log(err);
@@ -179,7 +179,8 @@ function ShowRegistro({ show, id, cga, type }: Props) {
     {
       name: "Desempeño Nacional",
       selector: (row: any) => (
-        <div className="text-lg  font-bold">
+        <div className="text-lg  font-bold" onClick={() => console.log(row)
+        }>
           {desempeño?.find((des) => des?.value == row.escala)?.label}
         </div>
       ),
@@ -210,14 +211,13 @@ function ShowRegistro({ show, id, cga, type }: Props) {
           <div className="relative   py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400 ">
             <div className="container mx-auto text-center px-4 mb-4">
               <div className="flex flex-row justify-around items-center uppercase text-center font-bold lg:text-2xl py-4 px-4 bg-blue-800 text-white rounded-lg">
-                Asignación de Procesos y Observaciones 
+                Asignación de Procesos y Observaciones
               </div>
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <div>
                   <DataTable
-                    title={`${
-                      (type && "Procesos Asignados") || "Lista de Procesos"
-                    }`}
+                    title={`${(type && "Procesos Asignados") || "Lista de Procesos"
+                      }`}
                     data={data?.procesos}
                     columns={columns}
                     customStyles={customStyles}
@@ -230,10 +230,9 @@ function ShowRegistro({ show, id, cga, type }: Props) {
                 </div>
                 <div>
                   <DataTable
-                    title={`${
-                      (type && "Observaciones Asignadas") ||
+                    title={`${(type && "Observaciones Asignadas") ||
                       "Lista de Observaciones"
-                    }`}
+                      }`}
                     data={data?.observaciones}
                     columns={columns2}
                     customStyles={customStyles}

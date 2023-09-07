@@ -44,7 +44,7 @@ export async function GET(req: any) {
 
       return NextResponse.json(
         {
-          body: "Información Guardada con Exito",
+          body: "Información Actualizada con Exito",
         },
         { status: 200 }
       );

@@ -54,12 +54,13 @@ const connection4 = mysql.createPool({
   queueLimit: 0,
 });
 const connection5 = mysql.createPool({
-  host: 'sygescol.sistemasivhorsnet.com',
-  user: 'leonidas_user',
-  password: 'FxJdC9aFgGc7',
+  host: process.env.APP_SERVER,
+  user: process.env.APP_USER5,
+  password: process.env.APP_PASSWORD5,
   port: 3306,
-  database: `leonidas_sygescol2023`,
+  database: `${process.env.APP_DATABASE5}${date}`,
 });
+
 const connection6 = mysql.createPool({
   host: process.env.APP_SERVER,
   user: process.env.APP_USER6,
