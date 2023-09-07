@@ -150,7 +150,7 @@ function Registro({ estudiante, escala, cga, show }: Props) {
           <div className="relative   py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400 ">
             <div className="container mx-auto text-center px-4 mb-4">
               <div className="flex flex-row justify-around items-center uppercase text-center font-bold lg:text-2xl py-4 px-4 bg-blue-800 text-white rounded-lg">
-                Asignación de Procesos y Observaciones
+                Asignación de Procesos y Observaciones 
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
