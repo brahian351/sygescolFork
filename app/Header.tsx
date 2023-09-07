@@ -30,11 +30,9 @@ const Header = ({ children }: Props) => {
               className="rounded-full"
               width={80}
               height={80}
-              src={`${
-                JSON.parse(localStorage?.datosColegio)?.urlColegio
-              }/sygescol${new Date().getFullYear()}/images/fotos/docentes/${
-                dataHeader?.foto || "no_imagen.jpg"
-              }`}
+              src={`${JSON.parse(localStorage?.datosColegio)?.urlColegio
+                }/sygescol${new Date().getFullYear()}/images/fotos/docentes/${dataHeader?.foto || "no_imagen.jpg"
+                }`}
               alt=""
             />
           </div>
