@@ -30,11 +30,9 @@ const Header = ({ children }: Props) => {
               className="rounded-full"
               width={80}
               height={80}
-              src={`${
-                JSON.parse(localStorage?.datosColegio)?.urlColegio
-              }/sygescol${new Date().getFullYear()}/images/fotos/docentes/${
-                dataHeader?.foto || "no_imagen.jpg"
-              }`}
+              src={`${JSON.parse(localStorage?.datosColegio)?.urlColegio
+                }/sygescol${new Date().getFullYear()}/images/fotos/docentes/${dataHeader?.foto || "no_imagen.jpg"
+                }`}
               alt=""
             />
           </div>
@@ -109,9 +107,7 @@ const Header = ({ children }: Props) => {
                   setActive={setActive}
                   active={active}
                   target={1}
-                  link={`${
-                    JSON.parse(localStorage?.datosColegio)?.urlColegio
-                  }/sygescol${new Date().getFullYear()}/comportamiento_s1_notas.php`}
+                  link={`https://sygescol.sistemasivhorsnet.com/login_varios_usuarios.php`}
                   icono={
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -135,9 +131,7 @@ const Header = ({ children }: Props) => {
                   setActive={setActive}
                   active={active}
                   target={1}
-                  link={`${
-                    JSON.parse(localStorage?.datosColegio)?.urlColegio
-                  }/sygescol${new Date().getFullYear()}/planilla_inastencia_virtual_preescolar.php`}
+                  link={`https://sygescol.sistemasivhorsnet.com/login_varios_usuarios.php`}
                   icono={
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
