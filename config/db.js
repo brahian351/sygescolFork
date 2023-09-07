@@ -54,11 +54,11 @@ const connection4 = mysql.createPool({
   queueLimit: 0,
 });
 const connection5 = mysql.createPool({
-  host: process.env.APP_SERVER,
-  user: process.env.APP_USER5,
-  password: process.env.APP_PASSWORD5,
+  host: 'sygescol.sistemasivhorsnet.com',
+  user: 'leonidas_user',
+  password: 'FxJdC9aFgGc7',
   port: 3306,
-  database: `${process.env.APP_DATABASE5}${date}`,
+  database: `leonidas_sygescol2023`,
   waitForConnections: true,
   connectionLimit: 5,
   queueLimit: 0,

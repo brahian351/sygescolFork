@@ -10,7 +10,9 @@ export type Props = {
   show: any;
 };
 function Registro({ estudiante, escala, cga, show }: Props) {
+
   const [data, setData] = useState({} as any);
+
   const GetBase = async () => {
     // console.log("todo bien");
     const proceso = await axios
@@ -29,6 +31,7 @@ function Registro({ estudiante, escala, cga, show }: Props) {
         console.log(error);
         alert("Existe un error al consultar los procesos");
       });
+
     const Observaciones = await axios
       .get(
         `/api/ObservacionesProcesos/ProcesoCargado?cg=${cga}&e=${escala}&c=${localStorage.getItem(
@@ -74,6 +77,7 @@ function Registro({ estudiante, escala, cga, show }: Props) {
       ),
     },
   ];
+
   const columns2: any = [
     {
       name: "Proceso",
@@ -100,12 +104,12 @@ function Registro({ estudiante, escala, cga, show }: Props) {
       ),
     },
   ];
+
   const handleAsign = async (id: any) => {
+
     axios
       .get(
-        `/api/Planilla/Registros/Procesos/Save?e=${estudiante}&c=${localStorage.getItem(
-          "colegio"
-        )}&p=${id}`
+        `/api/Planilla/Registros/Procesos/Save?e=${estudiante}&c=${localStorage.getItem("colegio")}&p=${id}`
       )
       .then((res) => {
         alert(res.data.body);
@@ -116,6 +120,7 @@ function Registro({ estudiante, escala, cga, show }: Props) {
       });
     // show(false);
   };
+
   const handleAsign2 = (id: any) => {
     axios
       .get(
@@ -132,10 +137,12 @@ function Registro({ estudiante, escala, cga, show }: Props) {
       });
     // show(false);
   };
+
   useEffect(() => {
     // console.log("entre");
     GetBase();
   }, []);
+
   return (
     <>
       <div className="bg-black/50 overflow-auto  transition duration-150 ease-in-out z-10 fixed top-0 right-0 bottom-0 left-0">
