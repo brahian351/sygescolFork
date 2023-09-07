@@ -11,8 +11,9 @@ export type Props = {
   InfoPdf: any;
   data: any;
   firma: any;
+  per: any;
 };
-function MyResult({ InfoPdf, data, firma }: Props) {
+function MyResult({ InfoPdf, data, firma, per }: Props) {
   return (
     <Document>
       {InfoPdf?.estudiante.map((inf: any, key: number) => {
@@ -34,7 +35,7 @@ function MyResult({ InfoPdf, data, firma }: Props) {
                     }
                   >
                     <Cabecera data={data} />
-                    <PersonalInfo data={inf} grup={InfoPdf?.grupo} />
+                    <PersonalInfo data={inf} grup={InfoPdf?.grupo} per={per} />
                     <Dimension
                       dimensiones={InfoPdf?.cga}
                       data={inf}
@@ -75,7 +76,7 @@ function MyResult({ InfoPdf, data, firma }: Props) {
                     }
                   >
                     <Cabecera data={data} />
-                    <PersonalInfo data={inf} grup={InfoPdf?.grupo} />
+                    <PersonalInfo data={inf} grup={InfoPdf?.grupo} per={per} />
                     <Dimension
                       dimensiones={InfoPdf?.cga}
                       data={inf}

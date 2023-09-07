@@ -59,10 +59,8 @@ const connection5 = mysql.createPool({
   password: process.env.APP_PASSWORD5,
   port: 3306,
   database: `${process.env.APP_DATABASE5}${date}`,
-  waitForConnections: true,
-  connectionLimit: 5,
-  queueLimit: 0,
 });
+
 const connection6 = mysql.createPool({
   host: process.env.APP_SERVER,
   user: process.env.APP_USER6,

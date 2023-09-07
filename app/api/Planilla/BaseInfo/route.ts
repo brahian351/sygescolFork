@@ -11,9 +11,11 @@ export async function GET(req: any) {
     const [dataColegio]: any = await conexion.query(
       `SELECT uu AS url FROM clrp`
     );
+
     const [estudiante]: any = await conexion.query(
       `SELECT CONCAT(alumno_ape1,' ',alumno_ape2,' ',alumno_nom1,' ',alumno_nom2,' ') AS nombre, alumno.alumno_id AS alumno, matri_id AS matricula, matri_codigo AS codigo, alumno_rum AS rum FROM alumno INNER JOIN matricula ON alumno.alumno_id = matricula.alumno_id WHERE grupo_id = ${grupo} AND matri_id NOT IN (SELECT matri_id FROM novedad_estudiante) AND matri_estado = 0 ORDER BY alumno_ape1,alumno_ape2,alumno_nom1,alumno_nom2 ASC`
     );
+
     const estdianteFormated: any = [];
     for await (const est of estudiante) {
       await axios

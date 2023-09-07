@@ -27,7 +27,7 @@ export async function GET(req: any) {
     const conexion = conecctions[colegio];
 
     const [AuditoriaDocente]: any = await conexion.query(
-      `SELECT auditoriaPeriodos.id as IdAuditoria,auditoriaPeriodos.tipo_pendiente,auditoriaPeriodos.matri_id,v_grupos.grupo_nombre,v_grupos.jornada_nombre,concat(dcne.dcne_ape1," ",dcne.dcne_ape2) as Apellidos, concat(dcne.dcne_nom1," ",dcne.dcne_nom2) as Nombre,aintrs.b AS asignatura, cga.i AS cga FROM auditoriaPeriodos INNER JOIN v_grupos ON auditoriaPeriodos.grupo_id=v_grupos.grupo_id INNER JOIN dcne ON dcne.i=auditoriaPeriodos.dcne_id inner join cga on cga.i=auditoriaPeriodos.cga_id INNER JOIN aintrs ON aintrs.i = cga.a  WHERE auditoriaPeriodos.dcne_id = ${IdDocente} and auditoriaPeriodos.estado='1' `
+      `SELECT auditoriaPeriodos.id as IdAuditoria,auditoriaPeriodos.tipo_pendiente,auditoriaPeriodos.matri_id,v_grupos.grupo_nombre,v_grupos.jornada_nombre,concat(dcne.dcne_ape1," ",dcne.dcne_ape2) as Apellidos, concat(dcne.dcne_nom1," ",dcne.dcne_nom2) as Nombre,aintrs.b AS asignatura, cga.i AS cga,v_grupos.grupo_id as GrupoId FROM auditoriaPeriodos INNER JOIN v_grupos ON auditoriaPeriodos.grupo_id=v_grupos.grupo_id INNER JOIN dcne ON dcne.i=auditoriaPeriodos.dcne_id inner join cga on cga.i=auditoriaPeriodos.cga_id INNER JOIN aintrs ON aintrs.i = cga.a  WHERE auditoriaPeriodos.dcne_id = ${IdDocente} and auditoriaPeriodos.estado='1' ORDER BY auditoriaPeriodos.tipo_pendiente ASC`
     );
 
     if (AuditoriaDocente?.length == 0) {
@@ -69,6 +69,7 @@ export async function GET(req: any) {
 
       if (!acc[key]) {
         acc[key] = {
+          GrupoId: el.GrupoId,
           GrupoNombre: el.grupo_nombre,
           IdAuditoria: el.IdAuditoria,
           pendientes: [],

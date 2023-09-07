@@ -223,6 +223,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                         escala2 = desempeño.find(
                           (des: any) => des.value == pro?.escala
                         );
+
                         alto = alto - 50;
                         // console.log(alto);
                         if (alto == 47) {
@@ -246,7 +247,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                                 {pro.texto.charAt(0).toUpperCase() +
                                   pro.texto.slice(1).toLowerCase()}
                               </Text>
-                              {key3 == 0 && (
+                              {/* {Object.keys(escala2).length > 0 && (
                                 <View
                                   style={{
                                     marginTop: 9,
@@ -258,13 +259,22 @@ function Dimension({ dimensiones, data, alto }: Props) {
                                   <Image
                                     src={`/Descriptores/${escala2?.img}.png`}
                                     style={{
-                                      width: 50,
-                                      height: 50,
+                                      width: "50",
+                                      height: "50",
                                       margin: "auto",
                                     }}
                                   />
                                 </View>
-                              )}
+                              )} */}
+
+                              <Image
+                                src={`/Descriptores/${escala2?.img}.png`}
+                                style={{
+                                  width: "50",
+                                  height: "40",
+                                  margin: "auto",
+                                }}
+                              />
                             </View>
                           </>
                         );
@@ -273,7 +283,7 @@ function Dimension({ dimensiones, data, alto }: Props) {
                       {observaciones?.map((obs: any) => {
                         return (
                           <>
-                            <View style={style.tableRow}>
+                            <View style={style?.tableRow}>
                               <Text
                                 style={{
                                   border: 0,

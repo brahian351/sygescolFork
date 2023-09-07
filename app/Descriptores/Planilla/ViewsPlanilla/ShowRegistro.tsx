@@ -13,6 +13,7 @@ export type Props = {
 function ShowRegistro({ show, id, cga, type }: Props) {
   const [data, setData] = useState({} as any);
   const [contador, setConteo] = useState(0 as number);
+
   let desempeño = [
     {
       value: 1,
@@ -31,6 +32,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       label: "Bajo",
     },
   ];
+
   const handleDelete = (id: number) => {
     Swal.fire({
       icon: "warning",
@@ -71,6 +73,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       }
     });
   };
+
   const handleDelete2 = (id: number) => {
     Swal.fire({
       icon: "warning",
@@ -111,29 +114,27 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       }
     });
   };
+
   const getData = async () => {
+
     await axios
-      .get(
-        `/api/Planilla/ShowInfo?c=${localStorage.getItem(
-          "colegio"
-        )}&e=${id}&cg=${cga}`
-      )
+      .get(`/api/Planilla/ShowInfo?c=${localStorage.getItem("colegio")}&e=${id}&cg=${cga}`)
       .then((res) => {
-        if (res.status == 200) {
-          setData(res.data);
-        }
+        if (res.status == 200) { setData(res.data) }
       })
       .catch((err) => {
         console.log(err);
         alert("Existe un error en la carga de información");
       });
   };
+
   const paginationComponentOptions = {
     rowsPerPageText: "Filas por página",
     rangeSeparatorText: "de",
     selectAllRowsItem: true,
     selectAllRowsItemText: "Todos",
   };
+
   const columns2: any = [
     {
       name: "Texto Definido",
@@ -165,6 +166,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       ),
     },
   ];
+
   const columns: any = [
     {
       name: "Texto Definido",
@@ -177,7 +179,8 @@ function ShowRegistro({ show, id, cga, type }: Props) {
     {
       name: "Desempeño Nacional",
       selector: (row: any) => (
-        <div className="text-lg  font-bold">
+        <div className="text-lg  font-bold" onClick={() => console.log(row)
+        }>
           {desempeño?.find((des) => des?.value == row.escala)?.label}
         </div>
       ),
@@ -196,9 +199,11 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       ),
     },
   ];
+
   useEffect(() => {
     getData();
   }, [contador]);
+
   return (
     <>
       <div className="bg-black/50 overflow-auto  transition duration-150 ease-in-out z-10 fixed top-0 right-0 bottom-0 left-0">
@@ -211,9 +216,8 @@ function ShowRegistro({ show, id, cga, type }: Props) {
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <div>
                   <DataTable
-                    title={`${
-                      (type && "Procesos Asignados") || "Lista de Procesos"
-                    }`}
+                    title={`${(type && "Procesos Asignados") || "Lista de Procesos"
+                      }`}
                     data={data?.procesos}
                     columns={columns}
                     customStyles={customStyles}
@@ -226,10 +230,9 @@ function ShowRegistro({ show, id, cga, type }: Props) {
                 </div>
                 <div>
                   <DataTable
-                    title={`${
-                      (type && "Observaciones Asignadas") ||
+                    title={`${(type && "Observaciones Asignadas") ||
                       "Lista de Observaciones"
-                    }`}
+                      }`}
                     data={data?.observaciones}
                     columns={columns2}
                     customStyles={customStyles}

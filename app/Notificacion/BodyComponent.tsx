@@ -22,8 +22,8 @@ const BodyComponent = () => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.Pendientes || []);
-        data.body && alert(data.body);
+        setData(data?.Pendientes || []);
+        data?.body && alert(data?.body);
       })
       .catch((error) => {
         alert("Error al cargar los datos");
@@ -44,7 +44,7 @@ const BodyComponent = () => {
       <Dialog open={size === "xl"} size={size || "xl"} handler={handleOpen}>
         <DialogHeader>Relación de los Pendientes Hallados</DialogHeader>
         <DialogBody divider>
-          <div className="max-h-[80vh] overflow-auto">
+          <div className="max-h-[75vh] overflow-auto">
             <TablaModifica Pendientes={PendientesSelected} />
           </div>
         </DialogBody>
@@ -83,7 +83,7 @@ const BodyComponent = () => {
       {Data?.length > 0 &&
         Data?.map((item: any) => (
           <BotonGrados
-            key={item.IdAuditoria}
+            key={item?.IdAuditoria}
             handleOpen={handleOpen}
             Grados={item}
             setPendientesSelected={setPendientesSelected}
