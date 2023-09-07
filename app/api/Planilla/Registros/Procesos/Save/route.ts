@@ -25,7 +25,7 @@ export async function GET(req: any) {
       }
     });
 
-    if (correcto == 0) {
+    if (correcto >= 0) {
       const [save]: any = await conexion.query(
         `INSERT INTO newProcesoEstudiante(estudiante,proceso,periodo,cga) 
         VALUES('${estudiante}','${proceso}','${procesoFind[0]?.periodo}','${procesoFind[0]?.cga}')`
@@ -34,21 +34,7 @@ export async function GET(req: any) {
         { body: "Información Guardada con Exito" },
         { status: 200 }
       );
-    } else if (correcto > 0) {
-
-      const [update]: any = await conexion.query(
-        `UPDATE newProcesoEstudiante 
-         SET cga = '${procesoFind[0]?.cga}' 
-         WHERE estudiante = '${estudiante}'`
-      );
-
-      return NextResponse.json(
-        {
-          body: "Información Actualizada con Exito",
-        },
-        { status: 200 }
-      );
-    }
+    } 
   } catch (error) {
     console.log(error);
     return NextResponse.json(
