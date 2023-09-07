@@ -6,7 +6,6 @@ export type Props = {
   per: any;
 };
 const PersonalInfo = ({ data, grup, per }: Props) => {
-  console.log("per", per);
 
   const style: any = {
     marginHeader: {

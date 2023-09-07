@@ -13,6 +13,7 @@ export type Props = {
 function ShowRegistro({ show, id, cga, type }: Props) {
   const [data, setData] = useState({} as any);
   const [contador, setConteo] = useState(0 as number);
+
   let desempeño = [
     {
       value: 1,
@@ -31,6 +32,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       label: "Bajo",
     },
   ];
+
   const handleDelete = (id: number) => {
     Swal.fire({
       icon: "warning",
@@ -71,6 +73,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       }
     });
   };
+
   const handleDelete2 = (id: number) => {
     Swal.fire({
       icon: "warning",
@@ -111,29 +114,27 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       }
     });
   };
+
   const getData = async () => {
+    
     await axios
-      .get(
-        `/api/Planilla/ShowInfo?c=${localStorage.getItem(
-          "colegio"
-        )}&e=${id}&cg=${cga}`
-      )
+      .get(`/api/Planilla/ShowInfo?c=${localStorage.getItem("colegio")}&e=${id}&cg=${cga}`)
       .then((res) => {
-        if (res.status == 200) {
-          setData(res.data);
-        }
+        if (res.status == 200) { setData(res.data)}
       })
       .catch((err) => {
         console.log(err);
         alert("Existe un error en la carga de información");
       });
   };
+
   const paginationComponentOptions = {
     rowsPerPageText: "Filas por página",
     rangeSeparatorText: "de",
     selectAllRowsItem: true,
     selectAllRowsItemText: "Todos",
   };
+
   const columns2: any = [
     {
       name: "Texto Definido",
@@ -165,6 +166,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       ),
     },
   ];
+
   const columns: any = [
     {
       name: "Texto Definido",
@@ -196,9 +198,11 @@ function ShowRegistro({ show, id, cga, type }: Props) {
       ),
     },
   ];
+
   useEffect(() => {
     getData();
   }, [contador]);
+
   return (
     <>
       <div className="bg-black/50 overflow-auto  transition duration-150 ease-in-out z-10 fixed top-0 right-0 bottom-0 left-0">
@@ -206,7 +210,7 @@ function ShowRegistro({ show, id, cga, type }: Props) {
           <div className="relative   py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400 ">
             <div className="container mx-auto text-center px-4 mb-4">
               <div className="flex flex-row justify-around items-center uppercase text-center font-bold lg:text-2xl py-4 px-4 bg-blue-800 text-white rounded-lg">
-                Asignación de Procesos y Observaciones
+                Asignación de Procesos y Observaciones 
               </div>
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <div>

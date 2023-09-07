@@ -6,8 +6,10 @@ export async function GET(req: any) {
   let colegio = searchParams.get("c");
   let estudiante = searchParams.get("e");
   let cga = searchParams.get("cg");
+
   try {
     const conexion = conecctions[colegio];
+
     const [grupo]: any = await conexion.query(
       `SELECT v_grupos.grupo_id FROM v_grupos INNER JOIN matricula ON v_grupos.grupo_id = matricula.grupo_id WHERE matri_id = ${estudiante}`
     );
@@ -22,6 +24,7 @@ export async function GET(req: any) {
     const [observaciones]: any = await conexion.query(
       `SELECT OE.id,texto, OP.escala FROM newObservacionesEstudiante OE INNER JOIN newObservacionesProcesos OP ON  OE.observacion = OP.id INNER JOIN newBancoObservacionesProcesos BOP ON BOP.id = OP.relacionBanco WHERE OP.periodo = ${periodo[0]?.per_id} AND OE.estudiante = ${estudiante} AND OP.cga = ${cga}`
     );
+    
     return NextResponse.json(
       { procesos: procesos || [], observaciones: observaciones || [] },
       { status: 200 }
